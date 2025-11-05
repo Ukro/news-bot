@@ -130,14 +130,15 @@ async def init_db():
         await db.commit()
 
 # ─── КЛАВІАТУРА ─────────────────────────────────────────────────────
+# ─── КЛАВІАТУРА ─────────────────────────────────────────────────────
 def get_topics_keyboard(selected=None):
     all_topics = {**TOPICS, **RFI_FEEDS}
     if selected is None: selected = []
     kb = []
     for t in all_topics:
         emoji = "✅" if t in selected else "⬜"
-        kb.append([InlineKeyboardButton(f"{emoji} {t}", callback_data=f"toggle_{t}")])
-    kb.append([InlineKeyboardButton("Готово ✅", callback_data="done")])
+        kb.append([InlineKeyboardButton(text=f"{emoji} {t}", callback_data=f"toggle_{t}")])
+    kb.append([InlineKeyboardButton(text="Готово ✅", callback_data="done")])
     return InlineKeyboardMarkup(inline_keyboard=kb)
 
 # ─── БОТ ───────────────────────────────────────────────────────────
@@ -217,3 +218,4 @@ async def main():
 if __name__ == "__main__":
 
     asyncio.run(main())
+
